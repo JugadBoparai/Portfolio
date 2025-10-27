@@ -1,0 +1,197 @@
+import { motion } from 'framer-motion';
+import { FaEnvelope, FaLinkedin, FaGithub } from 'react-icons/fa';
+import { useState } from 'react';
+
+const Contact = () => {
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    message: ''
+  });
+
+  const [status, setStatus] = useState('');
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value
+    });
+  };
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    // In production, integrate with a backend API or service like Formspree
+    setStatus('Thank you! Your message has been sent.');
+    setFormData({ name: '', email: '', message: '' });
+    setTimeout(() => setStatus(''), 5000);
+  };
+
+  return (
+    <section id="contact" className="py-20 bg-gradient-to-br from-blue-50 to-green-50">
+      <div className="container mx-auto px-6">
+        <motion.div
+          initial={{ opacity: 0, y: 50 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          viewport={{ once: true }}
+          className="text-center mb-16"
+        >
+          <h2 className="text-5xl font-bold mb-4 bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
+            Get In Touch
+          </h2>
+          <p className="text-gray-600 text-lg">
+            Let's connect and discuss how we can work together
+          </p>
+        </motion.div>
+
+        <div className="max-w-5xl mx-auto grid md:grid-cols-2 gap-12">
+          {/* Contact Info */}
+          <motion.div
+            initial={{ opacity: 0, x: -50 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.6 }}
+            viewport={{ once: true }}
+            className="space-y-8"
+          >
+            <div>
+              <h3 className="text-3xl font-bold mb-6 text-gray-800">
+                Contact Information
+              </h3>
+              <p className="text-gray-600 mb-8">
+                Feel free to reach out through any of these channels. I'm always open to discussing new projects, 
+                creative ideas, or opportunities to be part of your vision.
+              </p>
+            </div>
+
+            <div className="space-y-6">
+              <motion.a
+                whileHover={{ scale: 1.05, x: 10 }}
+                href="mailto:Jugadboparai@gmail.com"
+                className="flex items-center gap-4 p-4 bg-white rounded-xl shadow-md hover:shadow-lg transition-all"
+              >
+                <div className="w-12 h-12 bg-gradient-to-r from-primary to-secondary rounded-lg flex items-center justify-center text-white text-2xl">
+                  <FaEnvelope />
+                </div>
+                <div>
+                  <p className="font-semibold text-gray-800">Email</p>
+                  <p className="text-gray-600">Jugadboparai@gmail.com</p>
+                </div>
+              </motion.a>
+
+              <motion.a
+                whileHover={{ scale: 1.05, x: 10 }}
+                href="https://linkedin.com/in/jugad-singh-boparai-145646264"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-4 p-4 bg-white rounded-xl shadow-md hover:shadow-lg transition-all"
+              >
+                <div className="w-12 h-12 bg-gradient-to-r from-primary to-secondary rounded-lg flex items-center justify-center text-white text-2xl">
+                  <FaLinkedin />
+                </div>
+                <div>
+                  <p className="font-semibold text-gray-800">LinkedIn</p>
+                  <p className="text-gray-600">linkedin.com/in/jugad-singh-boparai-145646264</p>
+                </div>
+              </motion.a>
+
+              <motion.a
+                whileHover={{ scale: 1.05, x: 10 }}
+                href="https://github.com/jugadboparai"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-4 p-4 bg-white rounded-xl shadow-md hover:shadow-lg transition-all"
+              >
+                <div className="w-12 h-12 bg-gradient-to-r from-primary to-secondary rounded-lg flex items-center justify-center text-white text-2xl">
+                  <FaGithub />
+                </div>
+                <div>
+                  <p className="font-semibold text-gray-800">GitHub</p>
+                  <p className="text-gray-600">github.com/jugadboparai</p>
+                </div>
+              </motion.a>
+            </div>
+          </motion.div>
+
+          {/* Contact Form */}
+          <motion.div
+            initial={{ opacity: 0, x: 50 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.6 }}
+            viewport={{ once: true }}
+          >
+            <form onSubmit={handleSubmit} className="bg-white p-8 rounded-2xl shadow-lg space-y-6">
+              <div>
+                <label htmlFor="name" className="block text-gray-700 font-semibold mb-2">
+                  Name
+                </label>
+                <input
+                  type="text"
+                  id="name"
+                  name="name"
+                  value={formData.name}
+                  onChange={handleChange}
+                  required
+                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary transition-all"
+                  placeholder="Your Name"
+                />
+              </div>
+
+              <div>
+                <label htmlFor="email" className="block text-gray-700 font-semibold mb-2">
+                  Email
+                </label>
+                <input
+                  type="email"
+                  id="email"
+                  name="email"
+                  value={formData.email}
+                  onChange={handleChange}
+                  required
+                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary transition-all"
+                  placeholder="your.email@example.com"
+                />
+              </div>
+
+              <div>
+                <label htmlFor="message" className="block text-gray-700 font-semibold mb-2">
+                  Message
+                </label>
+                <textarea
+                  id="message"
+                  name="message"
+                  value={formData.message}
+                  onChange={handleChange}
+                  required
+                  rows={5}
+                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary transition-all resize-none"
+                  placeholder="Your message..."
+                />
+              </div>
+
+              <motion.button
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+                type="submit"
+                className="w-full px-6 py-4 bg-gradient-to-r from-primary to-secondary text-white rounded-lg font-semibold text-lg shadow-lg hover:shadow-xl transition-all"
+              >
+                Send Message
+              </motion.button>
+
+              {status && (
+                <motion.p
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  className="text-center text-secondary font-semibold"
+                >
+                  {status}
+                </motion.p>
+              )}
+            </form>
+          </motion.div>
+        </div>
+      </div>
+    </section>
+  );
+};
+
+export default Contact;
