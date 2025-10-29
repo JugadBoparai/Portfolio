@@ -10,6 +10,7 @@ const Contact = () => {
   });
 
   const [status, setStatus] = useState('');
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setFormData({
@@ -18,12 +19,34 @@ const Contact = () => {
     });
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    // In production, integrate with a backend API or service like Formspree
-    setStatus('Thank you! Your message has been sent.');
-    setFormData({ name: '', email: '', message: '' });
-    setTimeout(() => setStatus(''), 5000);
+    setIsSubmitting(true);
+    setStatus('');
+
+    const formDataObj = new FormData(e.currentTarget);
+    formDataObj.append("access_key", "8f51ccbf-de45-4666-a273-c9c3617a0baf");
+
+    try {
+      const response = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        body: formDataObj
+      });
+
+      const data = await response.json();
+
+      if (data.success) {
+        setStatus('✅ Thank you! Your message has been sent successfully.');
+        setFormData({ name: '', email: '', message: '' });
+      } else {
+        setStatus('❌ Something went wrong. Please try again or email me directly.');
+      }
+    } catch (error) {
+      setStatus('❌ Network error. Please try again or email me directly at Jugadboparai@gmail.com');
+    } finally {
+      setIsSubmitting(false);
+      setTimeout(() => setStatus(''), 7000);
+    }
   };
 
   return (
@@ -120,6 +143,9 @@ const Contact = () => {
             viewport={{ once: true }}
           >
             <form onSubmit={handleSubmit} className="bg-white p-8 rounded-2xl shadow-lg space-y-6">
+              {/* Honeypot field for spam protection */}
+              <input type="checkbox" name="botcheck" className="hidden" style={{ display: 'none' }} />
+              
               <div>
                 <label htmlFor="name" className="block text-gray-700 font-semibold mb-2">
                   Name
@@ -172,16 +198,19 @@ const Contact = () => {
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
                 type="submit"
-                className="w-full px-6 py-4 bg-gradient-to-r from-primary to-secondary text-white rounded-lg font-semibold text-lg shadow-lg hover:shadow-xl transition-all"
+                disabled={isSubmitting}
+                className="w-full px-6 py-4 bg-gradient-to-r from-primary to-secondary text-white rounded-lg font-semibold text-lg shadow-lg hover:shadow-xl transition-all disabled:opacity-50 disabled:cursor-not-allowed"
               >
-                Send Message
+                {isSubmitting ? 'Sending...' : 'Send Message'}
               </motion.button>
 
               {status && (
                 <motion.p
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
-                  className="text-center text-secondary font-semibold"
+                  className={`text-center font-semibold ${
+                    status.includes('✅') ? 'text-green-600' : 'text-red-600'
+                  }`}
                 >
                   {status}
                 </motion.p>
