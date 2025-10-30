@@ -9,7 +9,6 @@ interface VaderToggleProps {
 
 const VaderToggle = ({ isDarkMode, onToggle }: VaderToggleProps) => {
   const [isHovering, setIsHovering] = useState(false);
-  const [hoverProgress, setHoverProgress] = useState(0);
   const [showVaderImage, setShowVaderImage] = useState(false);
   const [showVaderAnimation, setShowVaderAnimation] = useState(false);
   const [showQuote, setShowQuote] = useState(false);
@@ -31,7 +30,6 @@ const VaderToggle = ({ isDarkMode, onToggle }: VaderToggleProps) => {
       const interval = setInterval(() => {
         const elapsed = Date.now() - startTime;
         const progress = Math.min(elapsed / 5000, 1); // 5 seconds
-        setHoverProgress(progress);
 
         if (progress >= 1) {
           clearInterval(interval);
@@ -46,10 +44,6 @@ const VaderToggle = ({ isDarkMode, onToggle }: VaderToggleProps) => {
       if (hoverTimerRef.current) {
         clearInterval(hoverTimerRef.current);
         hoverTimerRef.current = null;
-      }
-      // Only reset hover progress, not the Vader image visibility
-      if (!showVaderImage) {
-        setHoverProgress(0);
       }
     }
 
@@ -68,7 +62,6 @@ const VaderToggle = ({ isDarkMode, onToggle }: VaderToggleProps) => {
     if (showVaderImage) {
       const hideTimer = setTimeout(() => {
         setShowVaderImage(false);
-        setHoverProgress(0);
       }, 5000);
 
       return () => {
