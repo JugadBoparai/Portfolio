@@ -49,7 +49,7 @@ const Skills = () => {
   ];
 
   return (
-    <section id="skills" className="py-20 bg-gradient-to-br from-green-50 to-blue-50">
+    <section id="skills" className="py-20 bg-gradient-to-br from-green-50 to-blue-50 dark:from-gray-900 dark:to-gray-800 transition-colors duration-500">
       <div className="container mx-auto px-6">
         <motion.div
           initial={{ opacity: 0, y: 50 }}
@@ -58,16 +58,16 @@ const Skills = () => {
           viewport={{ once: true }}
           className="text-center mb-16"
         >
-          <h2 className="text-5xl font-bold mb-4 bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
+          <h2 className="text-5xl font-bold mb-4 bg-gradient-to-r from-primary to-secondary dark:from-orange-400 dark:to-amber-500 bg-clip-text text-transparent">
             Skills
           </h2>
-          <p className="text-gray-600 text-lg">Technologies and expertise I bring to the table</p>
+          <p className="text-gray-600 dark:text-gray-300 text-lg transition-colors duration-500">Technologies and expertise I bring to the table</p>
         </motion.div>
 
         <div className="max-w-6xl mx-auto space-y-12">
           {/* Technical Skills */}
           <div>
-            <h3 className="text-3xl font-bold mb-8 text-center text-gray-800">Technical Skills</h3>
+            <h3 className="text-3xl font-bold mb-8 text-center text-gray-800 dark:text-gray-100 transition-colors duration-500">Technical Skills</h3>
             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
               {technicalSkills.map((skill, index) => (
                 <motion.div
@@ -77,12 +77,12 @@ const Skills = () => {
                   transition={{ duration: 0.5, delay: index * 0.05 }}
                   viewport={{ once: true }}
                   whileHover={{ scale: 1.1, rotate: 5 }}
-                  className="bg-white p-6 rounded-xl shadow-md hover:shadow-xl transition-all cursor-pointer"
+                  className="bg-white dark:bg-gray-700 p-6 rounded-xl shadow-md hover:shadow-xl transition-all duration-500 cursor-pointer"
                 >
-                  <div className="text-5xl mb-3 text-primary flex justify-center">
+                  <div className="text-5xl mb-3 text-primary dark:text-orange-400 flex justify-center transition-colors duration-500">
                     {skill.icon}
                   </div>
-                  <p className="text-center font-semibold text-gray-800">{skill.name}</p>
+                  <p className="text-center font-semibold text-gray-800 dark:text-gray-100 transition-colors duration-500">{skill.name}</p>
                 </motion.div>
               ))}
             </div>
@@ -90,7 +90,7 @@ const Skills = () => {
 
           {/* Soft Skills */}
           <div>
-            <h3 className="text-3xl font-bold mb-8 text-center text-gray-800">Soft Skills</h3>
+            <h3 className="text-3xl font-bold mb-8 text-center text-gray-800 dark:text-gray-100 transition-colors duration-500">Soft Skills</h3>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
               {softSkills.map((skill, index) => (
                 <motion.div
@@ -100,12 +100,12 @@ const Skills = () => {
                   transition={{ duration: 0.5, delay: index * 0.1 }}
                   viewport={{ once: true }}
                   whileHover={{ scale: 1.1, rotate: -5 }}
-                  className="bg-white p-6 rounded-xl shadow-md hover:shadow-xl transition-all cursor-pointer"
+                  className="bg-white dark:bg-gray-700 p-6 rounded-xl shadow-md hover:shadow-xl transition-all duration-500 cursor-pointer"
                 >
-                  <div className="text-5xl mb-3 text-secondary flex justify-center">
+                  <div className="text-5xl mb-3 text-secondary dark:text-amber-400 flex justify-center transition-colors duration-500">
                     {skill.icon}
                   </div>
-                  <p className="text-center font-semibold text-gray-800">{skill.name}</p>
+                  <p className="text-center font-semibold text-gray-800 dark:text-gray-100 transition-colors duration-500">{skill.name}</p>
                 </motion.div>
               ))}
             </div>

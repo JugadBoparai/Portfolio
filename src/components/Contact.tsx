@@ -50,7 +50,7 @@ const Contact = () => {
   };
 
   return (
-    <section id="contact" className="py-20 bg-gradient-to-br from-blue-50 to-green-50">
+    <section id="contact" className="py-20 bg-gradient-to-br from-blue-50 to-green-50 dark:from-gray-800 dark:to-gray-900 transition-colors duration-500">
       <div className="container mx-auto px-6">
         <motion.div
           initial={{ opacity: 0, y: 50 }}
@@ -59,10 +59,10 @@ const Contact = () => {
           viewport={{ once: true }}
           className="text-center mb-16"
         >
-          <h2 className="text-5xl font-bold mb-4 bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
+          <h2 className="text-5xl font-bold mb-4 bg-gradient-to-r from-primary to-secondary dark:from-orange-400 dark:to-amber-500 bg-clip-text text-transparent">
             Get In Touch
           </h2>
-          <p className="text-gray-600 text-lg">
+          <p className="text-gray-600 dark:text-gray-300 text-lg transition-colors duration-500">
             Let's connect and discuss how we can work together
           </p>
         </motion.div>
@@ -77,10 +77,10 @@ const Contact = () => {
             className="space-y-8"
           >
             <div>
-              <h3 className="text-3xl font-bold mb-6 text-gray-800">
+              <h3 className="text-3xl font-bold mb-6 text-gray-800 dark:text-gray-100 transition-colors duration-500">
                 Contact Information
               </h3>
-              <p className="text-gray-600 mb-8">
+              <p className="text-gray-600 dark:text-gray-300 mb-8 transition-colors duration-500">
                 Feel free to reach out through any of these channels. I'm always open to discussing new projects, 
                 creative ideas, or opportunities to be part of your vision.
               </p>
@@ -90,14 +90,14 @@ const Contact = () => {
               <motion.a
                 whileHover={{ scale: 1.05, x: 10 }}
                 href="mailto:Jugadboparai@gmail.com"
-                className="flex items-center gap-4 p-4 bg-white rounded-xl shadow-md hover:shadow-lg transition-all"
+                className="flex items-center gap-4 p-4 bg-white dark:bg-gray-700 rounded-xl shadow-md hover:shadow-lg transition-all duration-500"
               >
-                <div className="w-12 h-12 bg-gradient-to-r from-primary to-secondary rounded-lg flex items-center justify-center text-white text-2xl">
+                <div className="w-12 h-12 bg-gradient-to-r from-primary to-secondary dark:from-orange-500 dark:to-amber-600 rounded-lg flex items-center justify-center text-white text-2xl transition-colors duration-500">
                   <FaEnvelope />
                 </div>
                 <div>
-                  <p className="font-semibold text-gray-800">Email</p>
-                  <p className="text-gray-600">Jugadboparai@gmail.com</p>
+                  <p className="font-semibold text-gray-800 dark:text-gray-100 transition-colors duration-500">Email</p>
+                  <p className="text-gray-600 dark:text-gray-300 transition-colors duration-500">Jugadboparai@gmail.com</p>
                 </div>
               </motion.a>
 
@@ -106,14 +106,14 @@ const Contact = () => {
                 href="https://linkedin.com/in/jugad-singh-boparai-145646264"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-4 p-4 bg-white rounded-xl shadow-md hover:shadow-lg transition-all"
+                className="flex items-center gap-4 p-4 bg-white dark:bg-gray-700 rounded-xl shadow-md hover:shadow-lg transition-all duration-500"
               >
-                <div className="w-12 h-12 bg-gradient-to-r from-primary to-secondary rounded-lg flex items-center justify-center text-white text-2xl">
+                <div className="w-12 h-12 bg-gradient-to-r from-primary to-secondary dark:from-orange-500 dark:to-amber-600 rounded-lg flex items-center justify-center text-white text-2xl transition-colors duration-500">
                   <FaLinkedin />
                 </div>
                 <div>
-                  <p className="font-semibold text-gray-800">LinkedIn</p>
-                  <p className="text-gray-600">linkedin.com/in/jugad-singh-boparai-145646264</p>
+                  <p className="font-semibold text-gray-800 dark:text-gray-100 transition-colors duration-500">LinkedIn</p>
+                  <p className="text-gray-600 dark:text-gray-300 transition-colors duration-500">linkedin.com/in/jugad-singh-boparai-145646264</p>
                 </div>
               </motion.a>
 
@@ -122,14 +122,14 @@ const Contact = () => {
                 href="https://github.com/jugadboparai"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-4 p-4 bg-white rounded-xl shadow-md hover:shadow-lg transition-all"
+                className="flex items-center gap-4 p-4 bg-white dark:bg-gray-700 rounded-xl shadow-md hover:shadow-lg transition-all duration-500"
               >
-                <div className="w-12 h-12 bg-gradient-to-r from-primary to-secondary rounded-lg flex items-center justify-center text-white text-2xl">
+                <div className="w-12 h-12 bg-gradient-to-r from-primary to-secondary dark:from-orange-500 dark:to-amber-600 rounded-lg flex items-center justify-center text-white text-2xl transition-colors duration-500">
                   <FaGithub />
                 </div>
                 <div>
-                  <p className="font-semibold text-gray-800">GitHub</p>
-                  <p className="text-gray-600">github.com/jugadboparai</p>
+                  <p className="font-semibold text-gray-800 dark:text-gray-100 transition-colors duration-500">GitHub</p>
+                  <p className="text-gray-600 dark:text-gray-300 transition-colors duration-500">github.com/jugadboparai</p>
                 </div>
               </motion.a>
             </div>
@@ -142,12 +142,12 @@ const Contact = () => {
             transition={{ duration: 0.6 }}
             viewport={{ once: true }}
           >
-            <form onSubmit={handleSubmit} className="bg-white p-8 rounded-2xl shadow-lg space-y-6">
+            <form onSubmit={handleSubmit} className="bg-white dark:bg-gray-800 p-8 rounded-2xl shadow-lg space-y-6 transition-colors duration-500">
               {/* Honeypot field for spam protection */}
               <input type="checkbox" name="botcheck" className="hidden" style={{ display: 'none' }} />
               
               <div>
-                <label htmlFor="name" className="block text-gray-700 font-semibold mb-2">
+                <label htmlFor="name" className="block text-gray-700 dark:text-gray-200 font-semibold mb-2 transition-colors duration-500">
                   Name
                 </label>
                 <input
@@ -157,13 +157,14 @@ const Contact = () => {
                   value={formData.name}
                   onChange={handleChange}
                   required
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary transition-all"
+                  autoComplete="name"
+                  className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-100 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary dark:focus:ring-orange-500 transition-all duration-300"
                   placeholder="Your Name"
                 />
               </div>
 
               <div>
-                <label htmlFor="email" className="block text-gray-700 font-semibold mb-2">
+                <label htmlFor="email" className="block text-gray-700 dark:text-gray-200 font-semibold mb-2 transition-colors duration-500">
                   Email
                 </label>
                 <input
@@ -173,13 +174,14 @@ const Contact = () => {
                   value={formData.email}
                   onChange={handleChange}
                   required
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary transition-all"
+                  autoComplete="email"
+                  className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-100 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary dark:focus:ring-orange-500 transition-all duration-300"
                   placeholder="your.email@example.com"
                 />
               </div>
 
               <div>
-                <label htmlFor="message" className="block text-gray-700 font-semibold mb-2">
+                <label htmlFor="message" className="block text-gray-700 dark:text-gray-200 font-semibold mb-2 transition-colors duration-500">
                   Message
                 </label>
                 <textarea
@@ -189,7 +191,7 @@ const Contact = () => {
                   onChange={handleChange}
                   required
                   rows={5}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary transition-all resize-none"
+                  className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-100 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary dark:focus:ring-orange-500 transition-all duration-300 resize-none"
                   placeholder="Your message..."
                 />
               </div>
@@ -199,7 +201,7 @@ const Contact = () => {
                 whileTap={{ scale: 0.98 }}
                 type="submit"
                 disabled={isSubmitting}
-                className="w-full px-6 py-4 bg-gradient-to-r from-primary to-secondary text-white rounded-lg font-semibold text-lg shadow-lg hover:shadow-xl transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+                className="w-full px-6 py-4 bg-gradient-to-r from-primary to-secondary dark:from-orange-500 dark:to-amber-600 text-white rounded-lg font-semibold text-lg shadow-lg hover:shadow-xl transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 {isSubmitting ? 'Sending...' : 'Send Message'}
               </motion.button>
