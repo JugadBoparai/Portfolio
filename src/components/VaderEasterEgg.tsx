@@ -29,35 +29,7 @@ export default function VaderEasterEgg() {
   const [showScene, setShowScene] = useState(false);
   const [showFalcon, setShowFalcon] = useState(false);
   const [isRunning, setIsRunning] = useState(false);
-  const [isLightMode, setIsLightMode] = useState(true);
   const audioRef = useRef<HTMLAudioElement | null>(null);
-
-  // Track theme changes to show/hide test button
-  useEffect(() => {
-    const checkTheme = () => {
-      setIsLightMode(!document.documentElement.classList.contains('dark'));
-    };
-
-    checkTheme();
-
-    const observer = new MutationObserver(checkTheme);
-    observer.observe(document.documentElement, {
-      attributes: true,
-      attributeFilter: ['class']
-    });
-
-    const handleStorageChange = (e: StorageEvent) => {
-      if (e.key === 'theme') {
-        checkTheme();
-      }
-    };
-    window.addEventListener('storage', handleStorageChange);
-
-    return () => {
-      observer.disconnect();
-      window.removeEventListener('storage', handleStorageChange);
-    };
-  }, []);
 
   useEffect(() => {
     console.log('✅ VaderEasterEgg mounted and listening');
@@ -317,8 +289,7 @@ export default function VaderEasterEgg() {
     }
     
     // Dark mode is already applied by MillenniumFalcon component during flight
-    // Just update state and complete
-    setIsLightMode(false);
+    // Complete Easter egg
     setIsRunning(false);
     console.log('✅ Easter Egg complete - Welcome to the dark side');
   };
@@ -336,21 +307,6 @@ export default function VaderEasterEgg() {
 
   return (
     <>
-      {/* Dev Test Button - Only show in light mode */}
-      {import.meta.env.DEV && isLightMode && (
-        <button
-          onClick={() => {
-            console.log('🔘 Manual trigger');
-            localStorage.removeItem('vaderEasterEggTriggered');
-            window.dispatchEvent(new CustomEvent('vader:activate'));
-          }}
-          className="fixed bottom-4 right-4 z-[30000] bg-red-600 text-white px-4 py-2 rounded shadow-lg hover:bg-red-700"
-          style={{ fontSize: '14px', fontWeight: 'bold' }}
-        >
-          🎬 Test Vader
-        </button>
-      )}
-      
       {/* Darth Vader Image - Enters from left side */}
       {showVader && (
         <div 
