@@ -81,24 +81,39 @@ const VaderToggle = ({ isDarkMode, onToggle }: VaderToggleProps) => {
   };
 
   const triggerVaderEasterEgg = () => {
-    // Mark as triggered for this page load only
-    setVaderTriggered(true);
-
-    // Play audio
-    if (audioRef.current) {
-      audioRef.current.play().catch(err => console.log('Audio play failed:', err));
+    // Prevent multiple triggers across loads - mark in localStorage
+    try {
+      const already = localStorage.getItem('vaderEasterEggTriggered');
+      console.log('🎬 Vader Easter Egg triggered! Already triggered:', already);
+      if (already === 'true') {
+        // If already triggered, just toggle theme normally
+        console.log('⚠️ Easter Egg already triggered this session, toggling theme normally');
+        onToggle(true);
+        return;
+      }
+      localStorage.setItem('vaderEasterEggTriggered', 'true');
+    } catch (e) {
+      // localStorage may be blocked; continue anyway
+      console.warn('Could not access localStorage for Vader flag', e);
     }
 
-    // Show Vader animation
+    // Mark as triggered for this page load
+    setVaderTriggered(true);
+
+    // Dispatch a global event so a central controller can run the cinematic sequence
+    try {
+      console.log('🔥 Dispatching vader:activate event');
+      window.dispatchEvent(new CustomEvent('vader:activate'));
+    } catch (e) {
+      console.warn('Could not dispatch vader:activate event', e);
+    }
+
+    // Keep the small local visuals here, but defer the heavy audio/3D to the central controller
     setShowVaderAnimation(true);
-
-    // Show quote after 0.8s (after initial impact)
     setTimeout(() => setShowQuote(true), 800);
-
-    // Hide quote after 2.2s
     setTimeout(() => setShowQuote(false), 2200);
 
-    // Toggle theme after 2.5s, skip clouds
+    // Also toggle theme after the cinematic (kept for compatibility)
     setTimeout(() => {
       onToggle(true); // true = skip clouds
       setShowVaderAnimation(false);

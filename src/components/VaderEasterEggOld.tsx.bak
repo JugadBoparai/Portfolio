@@ -1,0 +1,253 @@
+import { useEffect, useState, lazy, Suspense } from 'react';
+
+/**
+ * VaderEasterEgg
+ * - Listens for the global `vader:activate` event (dispatched by the toggle)
+ * - Runs a cinematic sequence: page shake (GSAP), navbar destruction, R3F physics scene, audio playback
+ * - Uses dynamic imports so the heavy libs are only loaded when the egg is triggered
+ * - Ensures the sequence runs once (guarded by localStorage flag set by the toggle)
+ */
+
+const AUDIO_PATH = '/audio/darth-vader.mp3';
+
+// Lazy load the 3D scene
+const LazyVader3DScene = lazy(() => import('./Vader3DScene'));
+
+export default function VaderEasterEgg() {
+  const [showScene, setShowScene] = useState(false);
+  const [isRunning, setIsRunning] = useState(false);
+
+  useEffect(() => {
+    console.log('✅ VaderEasterEgg component mounted and listening for vader:activate');
+    
+    const onActivate = async () => {
+      console.log('🎭 VaderEasterEgg: vader:activate event received!');
+      if (isRunning) {
+        console.log('⚠️ Sequence already running, ignoring');
+        return;
+      }
+      setIsRunning(true);
+
+      // Play breathing audio
+      let audio: HTMLAudioElement | null = null;
+      try {
+        console.log('🎵 Loading audio from:', AUDIO_PATH);
+        audio = new Audio(AUDIO_PATH);
+        audio.loop = true;
+        audio.volume = 0.45;
+        await audio.play().catch((err) => {
+          console.warn('Audio play failed:', err);
+        });
+        console.log('✅ Audio playing');
+      } catch (e) {
+        console.warn('Vader audio failed to play', e);
+      }
+
+      // 1) POWERFUL PAGE SHAKE (Hero Section)
+      try {
+        const { default: gsap } = await import('gsap');
+        console.log('✅ GSAP loaded - Beginning cinematic sequence');
+        
+        // Target the hero section specifically
+        const heroSection = document.querySelector('section:first-of-type') || document.querySelector('main > *:first-child');
+        
+        if (heroSection) {
+          console.log('💥 Shaking hero section');
+          gsap.to(heroSection, {
+            x: () => gsap.utils.random(-15, 15),
+            y: () => gsap.utils.random(-15, 15),
+            rotation: () => gsap.utils.random(-2, 2),
+            duration: 0.1,
+            repeat: 20,
+            ease: 'power4.inOut',
+            yoyo: true,
+            onComplete: () => {
+              gsap.set(heroSection, { x: 0, y: 0, rotation: 0 });
+            }
+          });
+        }
+        
+      } catch (e) {
+        console.error('❌ GSAP shake failed:', e);
+      }
+
+      // 2) NAVBAR DESTRUCTION
+      setTimeout(async () => {
+        try {
+          const { destroyNavbar } = await import('./NavbarDestruction');
+          console.log('💥 Destroying navbar');
+          await destroyNavbar();
+        } catch (e) {
+          console.error('❌ Navbar destruction failed:', e);
+        }
+      }, 500);
+
+      // 3) SHOW 3D SCENE & FORCE WAVE
+      setTimeout(() => {
+        console.log('⚡ Unleashing Force wave and 3D effects');
+        setShowScene(true);
+      }, 2000);
+
+      // Total cinematic duration
+      const totalDuration = 6000;
+      
+      setTimeout(async () => {
+        console.log('🌑 The Dark Side prevails... transitioning to dark mode');
+        
+        // Hide Force wave scene
+        setShowScene(false);
+        
+        // Immediately restore elements to prevent white screen
+        setTimeout(async () => {
+          // Fade out audio gradually
+          try {
+            if (audio) {
+              const fadeOut = setInterval(() => {
+                if (audio.volume > 0.05) {
+                  audio.volume = Math.max(0, audio.volume - 0.05);
+                } else {
+                  clearInterval(fadeOut);
+                  audio.pause();
+                  audio.currentTime = 0;
+                }
+              }, 50);
+            }
+          } catch (e) {}
+
+          // Transition to dark mode
+          try {
+            document.documentElement.classList.add('dark');
+            localStorage.setItem('theme', 'dark');
+          } catch (e) {}
+          
+          // Restore all elements
+          try {
+            const { gsap } = await import('gsap');
+            const sections = document.querySelectorAll('section, main > *');
+            const allElements = Array.from(sections).filter(el => {
+              const tag = el.tagName.toLowerCase();
+              return tag === 'section' || (el.children.length > 0 && tag !== 'header' && tag !== 'footer');
+            }).slice(0, 8);
+            
+            console.log('✨ Restoring page elements...');
+            
+            // Kill any running animations
+            gsap.killTweensOf(allElements);
+            
+            // Immediately set to visible to prevent white screen
+            allElements.forEach(el => {
+              const element = el as HTMLElement;
+              element.style.opacity = '1';
+              element.style.visibility = 'visible';
+            });
+            
+            // Snap everything back to normal smoothly
+            gsap.to(allElements, {
+              x: 0,
+              y: 0,
+              rotation: 0,
+              scale: 1,
+              opacity: 1,
+              clearProps: 'all',
+              duration: 1.0,
+              ease: 'sine.inOut',
+              stagger: 0.1,
+              force3D: true,
+              onComplete: () => {
+                // Reset inline styles
+                allElements.forEach((el) => {
+                  const element = el as HTMLElement;
+                  element.style.transform = '';
+                  element.style.opacity = '';
+                  element.style.visibility = '';
+                });
+                console.log('✅ Page fully restored in dark mode');
+              }
+            });
+          } catch (e) {
+            console.error('Failed to restore elements:', e);
+          }
+          
+          setIsRunning(false);
+        }, 500);
+      }, totalDuration);
+    };
+
+    window.addEventListener('vader:activate', onActivate as EventListener);
+    return () => window.removeEventListener('vader:activate', onActivate as EventListener);
+  }, [isRunning]);
+
+  return (
+    <div>
+      {/* Debug: Manual trigger button (remove after testing) */}
+      {import.meta.env.DEV && (
+        <button
+          onClick={() => {
+            console.log('🔘 Manual trigger clicked');
+            localStorage.removeItem('vaderEasterEggTriggered');
+            window.dispatchEvent(new CustomEvent('vader:activate'));
+          }}
+          className="fixed bottom-4 right-4 z-[30000] bg-red-600 text-white px-4 py-2 rounded shadow-lg hover:bg-red-700 transition-colors"
+          style={{ fontSize: '14px', fontWeight: 'bold' }}
+        >
+          🎬 Test Vader Effect
+        </button>
+      )}
+      
+      {showScene && (
+        <>
+          {/* 3D Physics Scene */}
+          <Suspense fallback={null}>
+            <LazyVader3DScene />
+          </Suspense>
+          
+          {/* Force Wave Overlay */}
+          <div 
+            className="fixed inset-0 pointer-events-none z-[20000] animate-fade-in"
+            style={{
+            background: 'radial-gradient(circle at center, transparent 0%, rgba(0,0,0,0.4) 100%)',
+            animation: 'fadeIn 0.5s ease-out, fadeOut 0.6s ease-in 2.2s forwards'
+          }}
+        >
+          {/* VaderScene is lazily rendered to avoid heavy bundles until needed */}
+          <LazyVaderScene />
+        </div>
+      )}
+      <style>{`
+        @keyframes fadeIn {
+          from { opacity: 0; }
+          to { opacity: 1; }
+        }
+        @keyframes fadeOut {
+          from { opacity: 1; }
+          to { opacity: 0; }
+        }
+      `}</style>
+    </div>
+  );
+}
+
+function LazyVaderScene() {
+  // simple client-side lazy loader that renders the heavyweight scene component
+  const [Loaded, setLoaded] = useState<null | React.ComponentType>(null);
+
+  useEffect(() => {
+    let mounted = true;
+    (async () => {
+      try {
+        // @ts-expect-error - Dynamic import of component module
+        const mod = await import('./VaderScene');
+        if (mounted) setLoaded(() => mod.default);
+      } catch (e) {
+        console.warn('Failed to load VaderScene', e);
+      }
+    })();
+    return () => {
+      mounted = false;
+    };
+  }, []);
+
+  if (!Loaded) return null;
+  const Scene = Loaded;
+  return <Scene />;
+}
