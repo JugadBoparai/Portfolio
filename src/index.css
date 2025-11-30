@@ -38,15 +38,21 @@ html.dark {
 /* Mobile safety: prevent sideways scroll and respect safe areas */
 html, body {
   width: 100%;
+  min-height: 100vh;
+  min-height: 100dvh; /* Dynamic viewport height for modern mobile browsers */
   overflow-x: hidden;
 }
 
 /* Account for iOS notch safe areas on fixed header/footer */
 header {
   padding-top: env(safe-area-inset-top);
+  padding-left: env(safe-area-inset-left);
+  padding-right: env(safe-area-inset-right);
 }
 footer {
   padding-bottom: env(safe-area-inset-bottom);
+  padding-left: env(safe-area-inset-left);
+  padding-right: env(safe-area-inset-right);
 }
 
 /* Accessibility: reduce motion if the user prefers */
