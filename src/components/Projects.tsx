@@ -25,7 +25,7 @@ const Projects = () => {
       title: "Surmedania.com",
       description: "A modern, responsive web experience with a native-app feel, optimized for mobile performance and accessibility.",
       technologies: ["React", "TypeScript", "Vite", "Tailwind CSS"],
-      image: "https://images.unsplash.com/photo-1529336953121-a5e0cd6d5b47?w=800&q=80",
+      image: "/assets/surmedania-dashboard.jpg",
       github: "https://github.com/jugadboparai",
       demo: "https://surmedania.com"
     },
