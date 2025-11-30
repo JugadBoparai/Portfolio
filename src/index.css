@@ -20,3 +20,26 @@ html {
   scroll-behavior: smooth;
 }
 
+/* Mobile safety: prevent sideways scroll and respect safe areas */
+html, body {
+  width: 100%;
+  overflow-x: hidden;
+}
+
+/* Account for iOS notch safe areas on fixed header/footer */
+header {
+  padding-top: env(safe-area-inset-top);
+}
+footer {
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+/* Accessibility: reduce motion if the user prefers */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+

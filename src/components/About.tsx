@@ -56,6 +56,8 @@ const About = () => {
                 src="/About.jpg" 
                 alt="Jugad Singh Boparai" 
                 className="w-full h-full object-cover"
+                loading="lazy"
+                decoding="async"
                 initial={{ scale: 1.2 }}
                 whileInView={{ scale: 1 }}
                 transition={{ duration: 1.5 }}

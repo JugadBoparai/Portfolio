@@ -39,6 +39,9 @@ const NeuralNetwork = () => {
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
 
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const isSmallScreen = window.innerWidth < 640; // Tailwind sm breakpoint
+
     // Set canvas size
     const resizeCanvas = () => {
       canvas.width = window.innerWidth;
@@ -48,7 +51,7 @@ const NeuralNetwork = () => {
     window.addEventListener('resize', resizeCanvas);
 
     // Initialize nodes
-    const nodeCount = 50;
+    const nodeCount = prefersReducedMotion ? 16 : (isSmallScreen ? 24 : (window.innerWidth < 1024 ? 40 : 50));
     nodesRef.current = Array.from({ length: nodeCount }, () => ({
       x: Math.random() * canvas.width,
       y: Math.random() * canvas.height,
@@ -63,9 +66,30 @@ const NeuralNetwork = () => {
     };
     window.addEventListener('mousemove', handleMouseMove);
 
+    // Touch move handler (for mobile)
+    const handleTouchMove = (e: TouchEvent) => {
+      if (e.touches && e.touches[0]) {
+        mouseRef.current = { x: e.touches[0].clientX, y: e.touches[0].clientY };
+      }
+    };
+    window.addEventListener('touchmove', handleTouchMove, { passive: true });
+
+    // Pause animation when tab not visible
+    let isVisible = true;
+    const handleVisibility = () => {
+      isVisible = !document.hidden;
+      if (isVisible && animationRef.current === null) {
+        animationRef.current = requestAnimationFrame(animate);
+      }
+    };
+    document.addEventListener('visibilitychange', handleVisibility);
+
     // Animation loop
     const animate = () => {
-      if (!ctx || !canvas) return;
+      if (!ctx || !canvas || !isVisible) {
+        animationRef.current = null;
+        return;
+      }
 
       // Clear canvas with fade effect
       ctx.fillStyle = isDarkMode 
@@ -79,14 +103,17 @@ const NeuralNetwork = () => {
       // Update and draw nodes
       nodes.forEach((node, i) => {
         // Mouse interaction - attract nodes to mouse
-        const dx = mouse.x - node.x;
-        const dy = mouse.y - node.y;
-        const dist = Math.sqrt(dx * dx + dy * dy);
-        
-        if (dist < 200) {
-          const force = (200 - dist) / 200;
-          node.vx += (dx / dist) * force * 0.02;
-          node.vy += (dy / dist) * force * 0.02;
+        if (!prefersReducedMotion) {
+          const dx = mouse.x - node.x;
+          const dy = mouse.y - node.y;
+          const dist = Math.sqrt(dx * dx + dy * dy) || 1;
+          const radius = isSmallScreen ? 140 : 200;
+          if (dist < radius) {
+            const force = (radius - dist) / radius;
+            const factor = isSmallScreen ? 0.015 : 0.02;
+            node.vx += (dx / dist) * force * factor;
+            node.vy += (dy / dist) * force * factor;
+          }
         }
 
         // Update position
@@ -107,38 +134,41 @@ const NeuralNetwork = () => {
           node.y = Math.max(0, Math.min(canvas.height, node.y));
         }
 
-        // Draw connections to nearby nodes
-        nodes.forEach((otherNode, j) => {
-          if (i >= j) return;
+        // Draw connections to nearby nodes (lighter on mobile/reduced motion)
+        if (!prefersReducedMotion) {
+          const maxDistance = isSmallScreen ? 110 : 150;
+          const maxOpacity = isSmallScreen ? 0.35 : 0.5;
+          const lineWidth = isSmallScreen ? 0.4 : 0.5;
+          nodes.forEach((otherNode, j) => {
+            if (i >= j) return;
 
-          const dx = otherNode.x - node.x;
-          const dy = otherNode.y - node.y;
-          const distance = Math.sqrt(dx * dx + dy * dy);
+            const dx = otherNode.x - node.x;
+            const dy = otherNode.y - node.y;
+            const distance = Math.sqrt(dx * dx + dy * dy);
 
-          if (distance < 150) {
-            const opacity = (1 - distance / 150) * 0.5;
-            
-            // Gradient line
-            const gradient = ctx.createLinearGradient(
-              node.x, node.y, otherNode.x, otherNode.y
-            );
-            
-            if (isDarkMode) {
-              gradient.addColorStop(0, `rgba(251, 146, 60, ${opacity})`); // orange
-              gradient.addColorStop(1, `rgba(251, 191, 36, ${opacity})`); // amber
-            } else {
-              gradient.addColorStop(0, `rgba(6, 182, 212, ${opacity})`); // cyan
-              gradient.addColorStop(1, `rgba(59, 130, 246, ${opacity})`); // blue
+            if (distance < maxDistance) {
+              const opacity = (1 - distance / maxDistance) * maxOpacity;
+              const gradient = ctx.createLinearGradient(
+                node.x, node.y, otherNode.x, otherNode.y
+              );
+
+              if (isDarkMode) {
+                gradient.addColorStop(0, `rgba(251, 146, 60, ${opacity})`);
+                gradient.addColorStop(1, `rgba(251, 191, 36, ${opacity})`);
+              } else {
+                gradient.addColorStop(0, `rgba(6, 182, 212, ${opacity})`);
+                gradient.addColorStop(1, `rgba(59, 130, 246, ${opacity})`);
+              }
+
+              ctx.strokeStyle = gradient;
+              ctx.lineWidth = lineWidth;
+              ctx.beginPath();
+              ctx.moveTo(node.x, node.y);
+              ctx.lineTo(otherNode.x, otherNode.y);
+              ctx.stroke();
             }
-
-            ctx.strokeStyle = gradient;
-            ctx.lineWidth = 0.5;
-            ctx.beginPath();
-            ctx.moveTo(node.x, node.y);
-            ctx.lineTo(otherNode.x, otherNode.y);
-            ctx.stroke();
-          }
-        });
+          });
+        }
 
         // Draw node with glow
         const gradient = ctx.createRadialGradient(
@@ -173,11 +203,22 @@ const NeuralNetwork = () => {
       animationRef.current = requestAnimationFrame(animate);
     };
 
-    animate();
+    // If user prefers reduced motion, draw one static frame; else animate
+    if (prefersReducedMotion) {
+      animate();
+      if (animationRef.current) {
+        cancelAnimationFrame(animationRef.current);
+        animationRef.current = null;
+      }
+    } else {
+      animate();
+    }
 
     return () => {
       window.removeEventListener('resize', resizeCanvas);
       window.removeEventListener('mousemove', handleMouseMove);
+      window.removeEventListener('touchmove', handleTouchMove as unknown as EventListener);
+      document.removeEventListener('visibilitychange', handleVisibility);
       if (animationRef.current) {
         cancelAnimationFrame(animationRef.current);
       }

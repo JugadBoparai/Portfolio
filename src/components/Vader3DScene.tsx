@@ -175,52 +175,6 @@ function LavaStorm() {
   );
 }
 
-// Radial Force Wave
-function ForceWave() {
-  const waveRef = useRef<THREE.Mesh>(null);
-  
-  useEffect(() => {
-    if (!waveRef.current) return;
-    
-    let scale = 0;
-    let animationId: number;
-    
-    const animate = () => {
-      if (!waveRef.current) return;
-      
-      scale += 0.05;
-      waveRef.current.scale.set(scale, scale, 1);
-      const material = waveRef.current.material as THREE.MeshBasicMaterial;
-      if (material) {
-        material.opacity = Math.max(0, 1 - scale / 10);
-      }
-      
-      if (scale < 15) {
-        animationId = requestAnimationFrame(animate);
-      }
-    };
-    
-    const timeoutId = setTimeout(() => animate(), 500);
-    return () => {
-      clearTimeout(timeoutId);
-      if (animationId) {
-        cancelAnimationFrame(animationId);
-      }
-    };
-  }, []);
-
-  return (
-    <mesh ref={waveRef} position={[0, 0, -5]}>
-      <ringGeometry args={[0.5, 1, 64]} />
-      <meshBasicMaterial 
-        color="#ff0000" 
-        transparent 
-        opacity={1}
-        side={THREE.DoubleSide}
-      />
-    </mesh>
-  );
-}
 
 export default function Vader3DScene() {
   return (
