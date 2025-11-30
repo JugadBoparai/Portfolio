@@ -53,7 +53,7 @@ const About = () => {
             {/* Background Image with Overlay */}
             <div className="absolute inset-0">
               <motion.img 
-                src="/About.jpg" 
+                src="/assets/About.jpg" 
                 alt="Jugad Singh Boparai" 
                 className="w-full h-full object-cover"
                 loading="lazy"
