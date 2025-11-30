@@ -256,26 +256,30 @@ const Header = () => {
         {/* Mobile Menu */}
         {isOpen && (
           <motion.div
-            initial={{ opacity: 0, y: -20 }}
+            initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
-            className="md:hidden mt-4 pb-4"
+            exit={{ opacity: 0, y: -10 }}
+            className="md:hidden mt-2"
             id="mobile-menu"
             role="menu"
             ref={menuRef}
           >
-            {menuItems.map((item) => (
-              <button
+            {menuItems.map((item, index) => (
+              <motion.button
                 key={item}
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: index * 0.05 }}
                 onClick={() => scrollToSection(item)}
                 role="menuitem"
-                className={`w-full text-left min-h-12 px-4 flex items-center transition-colors ${
+                className={`w-full text-left min-h-12 px-4 py-3 flex items-center transition-all ${
                   activeSection === item.toLowerCase()
-                    ? 'text-cyan-500 font-semibold dark:text-orange-500'
-                    : 'text-gray-700 hover:text-cyan-600 dark:text-gray-200 dark:hover:text-orange-400'
+                    ? 'text-cyan-500 font-semibold dark:text-orange-500 bg-cyan-50/50 dark:bg-orange-900/10'
+                    : 'text-gray-700 hover:text-cyan-600 dark:text-gray-200 dark:hover:text-orange-400 hover:bg-gray-50/50 dark:hover:bg-gray-800/30'
                 }`}
               >
                 {item}
-              </button>
+              </motion.button>
             ))}
           </motion.div>
         )}
