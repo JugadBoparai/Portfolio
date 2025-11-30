@@ -22,6 +22,11 @@ body {
 
 html {
   scroll-behavior: smooth;
+  background-color: #ffffff;
+}
+
+html.dark {
+  background-color: #111827;
 }
 
 /* Defer offscreen rendering for heavy sections */
