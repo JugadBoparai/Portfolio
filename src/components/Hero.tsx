@@ -15,7 +15,7 @@ const Hero = () => {
       <NeuralNetwork />
 
       {/* Content */}
-      <div className="container mx-auto px-6 relative z-10 flex flex-col items-center justify-center min-h-screen py-20">
+      <div className="container mx-auto px-6 relative z-10 flex flex-col items-center justify-center min-h-screen py-12 sm:py-16 md:py-20">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
@@ -27,9 +27,9 @@ const Hero = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="mb-12 leading-tight"
+            className="mb-8 sm:mb-10 md:mb-12 leading-tight"
           >
-            <div className="text-2xl md:text-4xl lg:text-5xl font-light tracking-wide text-gray-700 dark:text-gray-400 mb-4">
+            <div className="text-xl sm:text-2xl md:text-4xl lg:text-5xl font-light tracking-wide text-gray-700 dark:text-gray-400 mb-3 sm:mb-4">
               Jugad Singh
             </div>
             <div className="text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-bold tracking-tight bg-gradient-to-r from-cyan-600 via-blue-600 to-indigo-600 dark:from-orange-500 dark:to-amber-500 bg-clip-text text-transparent leading-none pb-2">
@@ -42,7 +42,7 @@ const Hero = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.4 }}
-            className="text-lg sm:text-xl md:text-3xl lg:text-4xl font-semibold mb-8 bg-gradient-to-r from-blue-600 via-cyan-600 to-teal-600 dark:from-orange-500 dark:via-orange-400 dark:to-yellow-500 bg-clip-text text-transparent leading-tight"
+            className="text-base sm:text-lg md:text-2xl lg:text-3xl xl:text-4xl font-semibold mb-6 sm:mb-8 bg-gradient-to-r from-blue-600 via-cyan-600 to-teal-600 dark:from-orange-500 dark:via-orange-400 dark:to-yellow-500 bg-clip-text text-transparent leading-tight"
           >
             AI Engineer & Machine Learning Developer
           </motion.h2>
@@ -52,7 +52,7 @@ const Hero = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.6 }}
-            className="text-xl md:text-2xl text-gray-700 dark:text-gray-300 mb-12 max-w-3xl mx-auto leading-relaxed"
+            className="text-base sm:text-lg md:text-xl lg:text-2xl text-gray-700 dark:text-gray-300 mb-8 sm:mb-10 md:mb-12 max-w-3xl mx-auto leading-relaxed"
           >
             Passionate about building intelligent systems that shape the future.
           </motion.p>

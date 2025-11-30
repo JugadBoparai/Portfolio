@@ -49,25 +49,25 @@ const Skills = () => {
   ];
 
   return (
-    <section id="skills" className="py-20 bg-gradient-to-br from-green-50 to-blue-50 dark:from-gray-900 dark:to-gray-800 transition-colors duration-500">
+    <section id="skills" className="py-12 sm:py-16 md:py-20 bg-gradient-to-br from-green-50 to-blue-50 dark:from-gray-900 dark:to-gray-800 transition-colors duration-500">
       <div className="container mx-auto px-6">
         <motion.div
           initial={{ opacity: 0, y: 50 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
           viewport={{ once: true }}
-          className="text-center mb-16"
+          className="text-center mb-12 sm:mb-14 md:mb-16"
         >
-          <h2 className="text-5xl font-bold mb-4 bg-gradient-to-r from-primary to-secondary dark:from-orange-400 dark:to-amber-500 bg-clip-text text-transparent">
+          <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold mb-3 sm:mb-4 bg-gradient-to-r from-primary to-secondary dark:from-orange-400 dark:to-amber-500 bg-clip-text text-transparent">
             Skills
           </h2>
-          <p className="text-gray-600 dark:text-gray-300 text-lg transition-colors duration-500">Technologies and expertise I bring to the table</p>
+          <p className="text-gray-600 dark:text-gray-300 text-base sm:text-lg transition-colors duration-500">Technologies and expertise I bring to the table</p>
         </motion.div>
 
-        <div className="max-w-6xl mx-auto space-y-12">
+        <div className="max-w-6xl mx-auto space-y-8 sm:space-y-10 md:space-y-12">
           {/* Technical Skills */}
           <div>
-            <h3 className="text-3xl font-bold mb-8 text-center text-gray-800 dark:text-gray-100 transition-colors duration-500">Technical Skills</h3>
+            <h3 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-6 sm:mb-8 text-center text-gray-800 dark:text-gray-100 transition-colors duration-500">Technical Skills</h3>
             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
               {technicalSkills.map((skill, index) => (
                 <motion.div

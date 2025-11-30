@@ -64,19 +64,19 @@ const Projects = () => {
   ];
 
   return (
-    <section id="projects" className="cv-auto py-20 bg-white dark:bg-gray-900 transition-colors duration-500">
+    <section id="projects" className="cv-auto py-12 sm:py-16 md:py-20 bg-white dark:bg-gray-900 transition-colors duration-500">
       <div className="container mx-auto px-6">
         <motion.div
           initial={{ opacity: 0, y: 50 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
           viewport={{ once: true }}
-          className="text-center mb-16"
+          className="text-center mb-12 sm:mb-14 md:mb-16"
         >
-          <h2 className="text-5xl font-bold mb-4 bg-gradient-to-r from-primary to-secondary dark:from-orange-400 dark:to-amber-500 bg-clip-text text-transparent">
+          <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold mb-3 sm:mb-4 bg-gradient-to-r from-primary to-secondary dark:from-orange-400 dark:to-amber-500 bg-clip-text text-transparent">
             Projects
           </h2>
-          <p className="text-gray-600 dark:text-gray-300 text-lg transition-colors duration-500">Some of my recent work</p>
+          <p className="text-gray-600 dark:text-gray-300 text-base sm:text-lg transition-colors duration-500">Some of my recent work</p>
         </motion.div>
 
         <div className="grid md:grid-cols-2 gap-8 max-w-6xl mx-auto">
