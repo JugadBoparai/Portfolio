@@ -22,11 +22,11 @@ body {
 
 html {
   scroll-behavior: smooth;
-  background-color: #ffffff;
+  background: linear-gradient(135deg, #06b6d4 0%, #3b82f6 100%);
 }
 
 html.dark {
-  background-color: #111827;
+  background: linear-gradient(135deg, #ea580c 0%, #dc2626 100%);
 }
 
 /* Defer offscreen rendering for heavy sections */
