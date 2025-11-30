@@ -33,7 +33,7 @@ const Resume = () => {
             whileInView={{ scale: 1, opacity: 1 }}
             transition={{ duration: 0.5, delay: 0.2 }}
             viewport={{ once: true }}
-            className="bg-gradient-to-br from-blue-50 to-green-50 dark:from-gray-800 dark:to-gray-700 rounded-2xl p-6 sm:p-8 md:p-12 shadow-lg transition-colors duration-500">
+            className="bg-gradient-to-br from-blue-50 to-green-50 dark:from-gray-800 dark:to-gray-700 rounded-2xl p-6 sm:p-8 md:p-12 shadow-lg transition-colors duration-500"
           >
             <div className="mb-6">
               <div className="w-32 h-32 mx-auto mb-6 bg-gradient-to-br from-primary to-secondary dark:from-orange-500 dark:to-amber-600 rounded-full flex items-center justify-center transition-colors duration-500">
