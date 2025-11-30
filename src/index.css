@@ -22,11 +22,11 @@ body {
 
 html {
   scroll-behavior: smooth;
-  background-color: #f9fafb;
+  background-color: #ffffff;
 }
 
 html.dark {
-  background-color: #0f172a;
+  background-color: #111827;
 }
 
 /* Defer offscreen rendering for heavy sections */
