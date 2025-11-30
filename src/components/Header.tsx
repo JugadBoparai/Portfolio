@@ -11,6 +11,9 @@ const Header = () => {
   const [isDarkMode, setIsDarkMode] = useState(false);
   const [skipClouds, setSkipClouds] = useState(false);
   const observerRef = useRef<IntersectionObserver | null>(null);
+  const menuRef = useRef<HTMLDivElement | null>(null);
+  const menuButtonRef = useRef<HTMLButtonElement | null>(null);
+  const prevFocusRef = useRef<HTMLElement | null>(null);
 
   useEffect(() => {
     // Check for saved theme preference, default to light mode
@@ -126,6 +129,54 @@ const Header = () => {
     }
   };
 
+  // Focus management for mobile menu
+  useEffect(() => {
+    if (isOpen) {
+      prevFocusRef.current = (document.activeElement as HTMLElement) || null;
+      const container = menuRef.current;
+      if (!container) return;
+
+      const getFocusable = () =>
+        Array.from(container.querySelectorAll<HTMLElement>(
+          'a[href], button, textarea, input, select, [tabindex]:not([tabindex="-1"])'
+        )).filter(el => !el.hasAttribute('disabled') && !el.getAttribute('aria-hidden'));
+
+      const focusables = getFocusable();
+      if (focusables.length) focusables[0].focus();
+
+      const handleKeyDown = (e: KeyboardEvent) => {
+        if (e.key === 'Escape') {
+          e.preventDefault();
+          setIsOpen(false);
+          return;
+        }
+        if (e.key === 'Tab') {
+          const items = getFocusable();
+          if (!items.length) return;
+          const first = items[0];
+          const last = items[items.length - 1];
+          if (e.shiftKey && document.activeElement === first) {
+            e.preventDefault();
+            last.focus();
+          } else if (!e.shiftKey && document.activeElement === last) {
+            e.preventDefault();
+            first.focus();
+          }
+        }
+      };
+
+      document.addEventListener('keydown', handleKeyDown);
+      return () => document.removeEventListener('keydown', handleKeyDown);
+    } else {
+      // restore focus to the menu button when menu closes
+      if (menuButtonRef.current) {
+        menuButtonRef.current.focus();
+      } else if (prevFocusRef.current) {
+        prevFocusRef.current.focus();
+      }
+    }
+  }, [isOpen]);
+
   return (
     <>
       {/* Cloud transition animation for dark mode */}
@@ -182,7 +233,11 @@ const Header = () => {
           <div className="md:hidden flex items-center gap-4">
             <VaderToggle isDarkMode={isDarkMode} onToggle={toggleTheme} />
             <button
-              className="text-gray-500 dark:text-gray-300 text-2xl"
+              id="mobile-menu-button"
+              ref={menuButtonRef}
+              className="text-gray-500 dark:text-gray-300 text-2xl min-h-12 px-3"
+              aria-expanded={isOpen}
+              aria-controls="mobile-menu"
               onClick={() => setIsOpen(!isOpen)}
             >
               {isOpen ? <FaTimes /> : <FaBars />}
@@ -196,12 +251,16 @@ const Header = () => {
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             className="md:hidden mt-4 pb-4"
+            id="mobile-menu"
+            role="menu"
+            ref={menuRef}
           >
             {menuItems.map((item) => (
               <button
                 key={item}
                 onClick={() => scrollToSection(item)}
-                className={`block w-full text-left py-2 transition-colors ${
+                role="menuitem"
+                className={`w-full text-left min-h-12 px-4 flex items-center transition-colors ${
                   activeSection === item.toLowerCase()
                     ? 'text-cyan-500 font-semibold dark:text-orange-500'
                     : 'text-gray-500 hover:text-cyan-400 dark:text-gray-300 dark:hover:text-orange-400'

@@ -11,6 +11,15 @@ interface Project {
 }
 
 const Projects = () => {
+  const buildSrcSet = (url: string) => {
+    const widths = [480, 768, 1024, 1280];
+    return widths
+      .map((w) => url.replace(/w=\d+/, `w=${w}`))
+      .join(', ');
+  };
+
+  const sizes = '(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 600px';
+
   const projects: Project[] = [
     {
       title: "AI-Powered Threat Detection System",
@@ -47,7 +56,7 @@ const Projects = () => {
   ];
 
   return (
-    <section id="projects" className="py-20 bg-white dark:bg-gray-900 transition-colors duration-500">
+    <section id="projects" className="cv-auto py-20 bg-white dark:bg-gray-900 transition-colors duration-500">
       <div className="container mx-auto px-6">
         <motion.div
           initial={{ opacity: 0, y: 50 }}
@@ -76,6 +85,8 @@ const Projects = () => {
               <div className="relative h-48 overflow-hidden">
                 <img
                   src={project.image}
+                  srcSet={buildSrcSet(project.image)}
+                  sizes={sizes}
                   alt={project.title}
                   className="w-full h-full object-cover transition-transform duration-300 hover:scale-110"
                   loading="lazy"

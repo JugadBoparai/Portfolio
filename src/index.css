@@ -20,6 +20,12 @@ html {
   scroll-behavior: smooth;
 }
 
+/* Defer offscreen rendering for heavy sections */
+.cv-auto {
+  content-visibility: auto;
+  contain-intrinsic-size: 1px 800px; /* reserve space to reduce CLS */
+}
+
 /* Mobile safety: prevent sideways scroll and respect safe areas */
 html, body {
   width: 100%;

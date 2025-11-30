@@ -39,7 +39,7 @@ const About = () => {
   ];
 
   return (
-    <section id="about" className="bg-gradient-to-br from-blue-50 to-green-50 dark:from-gray-800 dark:to-gray-900 py-20 transition-colors duration-500">
+    <section id="about" className="cv-auto bg-gradient-to-br from-blue-50 to-green-50 dark:from-gray-800 dark:to-gray-900 py-20 transition-colors duration-500">
       <div className="container mx-auto px-6">
         {/* Hero Section with Background Image */}
         <motion.div

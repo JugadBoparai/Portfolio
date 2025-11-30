@@ -32,7 +32,7 @@ const Hero = () => {
             <div className="text-2xl md:text-4xl lg:text-5xl font-light tracking-wide text-gray-700 dark:text-gray-400 mb-4">
               Jugad Singh
             </div>
-            <div className="text-5xl md:text-7xl lg:text-8xl font-bold tracking-tight bg-gradient-to-r from-cyan-600 via-blue-600 to-indigo-600 dark:from-orange-500 dark:to-amber-500 bg-clip-text text-transparent leading-none pb-2">
+            <div className="text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-bold tracking-tight bg-gradient-to-r from-cyan-600 via-blue-600 to-indigo-600 dark:from-orange-500 dark:to-amber-500 bg-clip-text text-transparent leading-none pb-2">
               Boparai
             </div>
           </motion.h1>
@@ -42,7 +42,7 @@ const Hero = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.4 }}
-            className="text-xl md:text-3xl lg:text-4xl font-semibold mb-8 bg-gradient-to-r from-blue-600 via-cyan-600 to-teal-600 dark:from-orange-500 dark:via-orange-400 dark:to-yellow-500 bg-clip-text text-transparent leading-tight"
+            className="text-lg sm:text-xl md:text-3xl lg:text-4xl font-semibold mb-8 bg-gradient-to-r from-blue-600 via-cyan-600 to-teal-600 dark:from-orange-500 dark:via-orange-400 dark:to-yellow-500 bg-clip-text text-transparent leading-tight"
           >
             AI Engineer & Machine Learning Developer
           </motion.h2>
@@ -68,7 +68,7 @@ const Hero = () => {
             }}
             whileTap={{ scale: 0.95 }}
             onClick={scrollToAbout}
-            className="px-10 py-5 bg-gradient-to-r from-cyan-600 to-blue-600 dark:from-orange-500 dark:to-orange-600 text-white text-lg font-semibold rounded-full shadow-xl hover:from-cyan-700 hover:to-blue-700 dark:hover:from-orange-600 dark:hover:to-orange-700 transition-all duration-300"
+            className="px-8 sm:px-10 min-h-12 bg-gradient-to-r from-cyan-600 to-blue-600 dark:from-orange-500 dark:to-orange-600 text-white text-lg font-semibold rounded-full shadow-xl hover:from-cyan-700 hover:to-blue-700 dark:hover:from-orange-600 dark:hover:to-orange-700 transition-all duration-300"
           >
             Learn About Me
           </motion.button>
