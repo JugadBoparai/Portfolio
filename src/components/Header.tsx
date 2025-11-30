@@ -42,9 +42,13 @@ const Header = () => {
         if (newDarkMode) {
           document.documentElement.classList.add('dark');
           localStorage.setItem('theme', 'dark');
+          const meta = document.querySelector('meta[name="theme-color"]');
+          if (meta) meta.setAttribute('content', '#0b1020');
         } else {
           document.documentElement.classList.remove('dark');
           localStorage.setItem('theme', 'light');
+          const meta = document.querySelector('meta[name="theme-color"]');
+          if (meta) meta.setAttribute('content', '#ffffff');
         }
         setIsDarkMode(newDarkMode);
         
@@ -60,9 +64,13 @@ const Header = () => {
         if (newDarkMode) {
           document.documentElement.classList.add('dark');
           localStorage.setItem('theme', 'dark');
+          const meta = document.querySelector('meta[name="theme-color"]');
+          if (meta) meta.setAttribute('content', '#0b1020');
         } else {
           document.documentElement.classList.remove('dark');
           localStorage.setItem('theme', 'light');
+          const meta = document.querySelector('meta[name="theme-color"]');
+          if (meta) meta.setAttribute('content', '#ffffff');
         }
       }, 300);
     }
