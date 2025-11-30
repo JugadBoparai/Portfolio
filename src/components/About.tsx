@@ -81,13 +81,13 @@ const About = () => {
             </div>
 
             {/* Content */}
-            <div className="relative z-10 py-20 px-8 md:px-16">
+            <div className="relative z-10 py-12 sm:py-16 md:py-20 px-6 sm:px-8 md:px-16">
               <motion.h2
                 initial={{ opacity: 0, x: -50 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.6, delay: 0.2 }}
                 viewport={{ once: true }}
-                className="text-5xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-cyan-400 to-green-400 dark:from-orange-400 dark:to-amber-400 bg-clip-text text-transparent"
+                className="text-4xl sm:text-5xl md:text-6xl font-bold mb-4 sm:mb-6 bg-gradient-to-r from-cyan-400 to-green-400 dark:from-orange-400 dark:to-amber-400 bg-clip-text text-transparent"
               >
                 About Me
               </motion.h2>
@@ -97,9 +97,9 @@ const About = () => {
                 whileInView={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.6, delay: 0.4 }}
                 viewport={{ once: true }}
-                className="space-y-6 text-lg text-gray-100 max-w-3xl"
+                className="space-y-4 sm:space-y-6 text-base sm:text-lg text-gray-100 max-w-3xl"
               >
-                <p className="text-2xl leading-relaxed font-semibold">
+                <p className="text-lg sm:text-xl md:text-2xl leading-relaxed font-semibold">
                   Hi! I'm <span className="text-cyan-400 dark:text-orange-400">Jugad Singh Boparai</span>, 
                   a technologist at the intersection of{' '}
                   <span className="text-green-400 dark:text-amber-400">Cybersecurity</span>,{' '}
@@ -122,7 +122,7 @@ const About = () => {
                 whileInView={{ width: "100%" }}
                 transition={{ duration: 1, delay: 0.6 }}
                 viewport={{ once: true }}
-                className="h-1 bg-gradient-to-r from-cyan-400 via-green-400 to-blue-400 dark:from-orange-400 dark:via-amber-400 dark:to-orange-400 mt-8 rounded-full max-w-md"
+                className="h-1 bg-gradient-to-r from-cyan-400 via-green-400 to-blue-400 dark:from-orange-400 dark:via-amber-400 dark:to-orange-400 mt-6 sm:mt-8 rounded-full max-w-md"
               />
             </div>
           </div>
