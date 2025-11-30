@@ -23,9 +23,9 @@ const Projects = () => {
   const projects: Project[] = [
     {
       title: "Surmedania.com",
-      description: "A modern, responsive web experience with a native-app feel, optimized for mobile performance and accessibility.",
+      description: "A responsive dance school website featuring class sign-ups, user account functions, and integrated merch payments",
       technologies: ["React", "TypeScript", "Vite", "Tailwind CSS"],
-      image: "/assets/surmedania-dashboard.jpg",
+      image: "/assets/surmedania-dashboard.png",
       github: "https://github.com/jugadboparai",
       demo: "https://surmedania.com"
     },
