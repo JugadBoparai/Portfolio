@@ -22,6 +22,14 @@ const Projects = () => {
 
   const projects: Project[] = [
     {
+      title: "Surmdania.com",
+      description: "A modern, responsive web experience with a native-app feel, optimized for mobile performance and accessibility.",
+      technologies: ["React", "TypeScript", "Vite", "Tailwind CSS"],
+      image: "https://images.unsplash.com/photo-1529336953121-a5e0cd6d5b47?w=800&q=80",
+      github: "https://github.com/jugadboparai",
+      demo: "https://surmdania.com"
+    },
+    {
       title: "AI-Powered Threat Detection System",
       description: "Developed a machine learning model to detect and classify cybersecurity threats in real-time, achieving 95% accuracy using advanced NLP techniques.",
       technologies: ["Python", "TensorFlow", "NLP", "Cybersecurity"],
