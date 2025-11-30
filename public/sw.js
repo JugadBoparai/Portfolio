@@ -1,7 +1,8 @@
-const CACHE_NAME = 'jugad-portfolio-v1';
+const CACHE_NAME = 'jugad-portfolio-v2';
 const ASSETS = [
   '/',
   '/index.html',
+  '/offline.html',
 ];
 
 self.addEventListener('install', (event) => {
@@ -24,13 +25,24 @@ self.addEventListener('fetch', (event) => {
   const { request } = event;
   if (request.method !== 'GET') return;
 
+  // Navigation requests: network-first, fallback to offline page
+  if (request.mode === 'navigate') {
+    event.respondWith(
+      fetch(request).catch(async () => {
+        const cache = await caches.open(CACHE_NAME);
+        return cache.match('/offline.html');
+      })
+    );
+    return;
+  }
+
+  // Static assets: cache-first, then network
   event.respondWith(
     caches.match(request).then((cached) => {
       const fetchPromise = fetch(request)
         .then((response) => {
           const copy = response.clone();
           caches.open(CACHE_NAME).then((cache) => {
-            // Cache only same-origin GET requests
             if (request.url.startsWith(self.location.origin)) {
               cache.put(request, copy);
             }
