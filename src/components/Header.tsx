@@ -255,10 +255,17 @@ const Header = () => {
 
         {/* Mobile Menu */}
         {isOpen && (
+          <>
+          {/* Backdrop overlay */}
+          <div
+            className="md:hidden fixed inset-0 z-40 bg-black/30 dark:bg-black/50 backdrop-blur-sm"
+            onClick={() => setIsOpen(false)}
+            aria-hidden="true"
+          />
           <motion.div
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
-            className="md:hidden mt-4 pb-4"
+            className="md:hidden mt-4 pb-4 bg-white/95 dark:bg-[#0f172a]/95 rounded-xl shadow-xl border border-gray-100 dark:border-gray-700 z-50 relative"
             id="mobile-menu"
             role="menu"
             ref={menuRef}
@@ -271,13 +278,14 @@ const Header = () => {
                 className={`w-full text-left min-h-12 px-4 flex items-center transition-colors ${
                   activeSection === item.toLowerCase()
                     ? 'text-cyan-500 font-semibold dark:text-orange-500'
-                    : 'text-gray-500 hover:text-cyan-400 dark:text-gray-300 dark:hover:text-orange-400'
+                    : 'text-gray-700 hover:text-cyan-600 dark:text-gray-200 dark:hover:text-orange-400'
                 }`}
               >
                 {item}
               </button>
             ))}
           </motion.div>
+          </>
         )}
       </nav>
     </motion.header>
