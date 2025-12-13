@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion';
 import { FaGithub, FaExternalLinkAlt } from 'react-icons/fa';
+import SurmedaniaShowcase from './SurmedaniaShowcase';
 
 interface Project {
   title: string;
@@ -80,12 +81,16 @@ const Projects = () => {
         </motion.div>
 
         <div className="grid md:grid-cols-2 gap-8 max-w-6xl mx-auto">
-          {projects.map((project, index) => (
+          {/* Special showcase for Surmedania */}
+          <SurmedaniaShowcase />
+          
+          {/* Regular project cards for other projects */}
+          {projects.slice(1).map((project, index) => (
             <motion.div
               key={index}
               initial={{ opacity: 0, y: 50 }}
               whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: index * 0.1 }}
+              transition={{ duration: 0.6, delay: (index + 1) * 0.1 }}
               viewport={{ once: true }}
               whileHover={{ y: -10 }}
               className="bg-white dark:bg-gray-800 rounded-xl shadow-lg overflow-hidden border border-gray-100 dark:border-gray-700 hover:shadow-2xl transition-all duration-500"
