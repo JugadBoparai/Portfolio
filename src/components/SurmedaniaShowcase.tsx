@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion';
 import { useState } from 'react';
-import { FaGithub, FaExternalLinkAlt, FaMobileAlt, FaDesktop } from 'react-icons/fa';
+import { FaGithub, FaExternalLinkAlt, FaMobileAlt, FaDesktop, FaCode, FaRocket } from 'react-icons/fa';
 import { SiVite, SiTailwindcss, SiVercel, SiReact, SiNodedotjs } from 'react-icons/si';
 
 const SurmedaniaShowcase = () => {
@@ -35,14 +35,31 @@ const SurmedaniaShowcase = () => {
     >
       {/* Header Section */}
       <div className="p-6 md:p-8 border-b border-gray-200 dark:border-gray-700">
+        {/* Project Badge */}
+        <div className="flex items-center gap-3 mb-4">
+          <div className="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-primary/20 to-secondary/20 dark:from-orange-500/30 dark:to-amber-500/30 rounded-full border border-primary/30 dark:border-orange-500/30">
+            <FaCode className="text-primary dark:text-orange-400" size={16} />
+            <span className="text-sm font-semibold text-primary dark:text-orange-400">Built by Me</span>
+          </div>
+          <div className="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-green-500/20 to-emerald-500/20 rounded-full border border-green-500/30">
+            <FaRocket className="text-green-600 dark:text-green-400" size={16} />
+            <span className="text-sm font-semibold text-green-600 dark:text-green-400">Live Production</span>
+          </div>
+        </div>
+
         <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
           <div>
             <h3 className="text-3xl md:text-4xl font-bold mb-2 text-gray-800 dark:text-gray-100 transition-colors duration-500">
               Surmedania.com
             </h3>
-            <p className="text-gray-600 dark:text-gray-300 text-base md:text-lg leading-relaxed max-w-3xl">
-              A full-stack responsive dance school website featuring class sign-ups, multi-language support, 
-              e-commerce with Vipps payment integration, and an admin dashboard with real-time analytics.
+            <p className="text-gray-600 dark:text-gray-300 text-base md:text-lg leading-relaxed max-w-3xl mb-3">
+              <span className="font-semibold text-gray-800 dark:text-gray-200">Full-Stack Project:</span> I designed and developed this complete dance school platform from scratch, 
+              building both the frontend and backend infrastructure. Features include responsive design, 
+              multi-language support (EN/NO/PA), class registration system, e-commerce with Vipps payment integration, 
+              and a comprehensive admin dashboard with real-time analytics.
+            </p>
+            <p className="text-sm text-gray-500 dark:text-gray-400 italic">
+              Full-stack development • Solo project • Production-ready
             </p>
           </div>
           <div className="flex gap-3 flex-shrink-0">
@@ -199,9 +216,9 @@ const SurmedaniaShowcase = () => {
       </div>
 
       {/* Features List */}
-      <div className="p-6 md:p-8">
-        <h4 className="text-xl font-bold mb-4 text-gray-800 dark:text-gray-100">Key Features</h4>
-        <div className="grid md:grid-cols-2 gap-3">
+      <div className="p-6 md:p-8 border-t border-gray-200 dark:border-gray-700">
+        <h4 className="text-xl font-bold mb-4 text-gray-800 dark:text-gray-100">What I Built</h4>
+        <div className="grid md:grid-cols-2 gap-3 mb-6">
           {features.map((feature, index) => (
             <motion.div
               key={index}
@@ -215,6 +232,25 @@ const SurmedaniaShowcase = () => {
               <span className="text-gray-700 dark:text-gray-300 text-sm md:text-base">{feature}</span>
             </motion.div>
           ))}
+        </div>
+
+        {/* Accomplishments Section */}
+        <div className="bg-gradient-to-r from-primary/10 to-secondary/10 dark:from-orange-500/10 dark:to-amber-500/10 rounded-xl p-6 border border-primary/20 dark:border-orange-500/20">
+          <h4 className="text-lg font-bold mb-3 text-gray-800 dark:text-gray-100">Key Accomplishments</h4>
+          <div className="grid md:grid-cols-3 gap-4">
+            <div>
+              <div className="text-2xl font-bold text-primary dark:text-orange-400 mb-1">100%</div>
+              <div className="text-sm text-gray-600 dark:text-gray-400">Full-Stack Development</div>
+            </div>
+            <div>
+              <div className="text-2xl font-bold text-primary dark:text-orange-400 mb-1">3</div>
+              <div className="text-sm text-gray-600 dark:text-gray-400">Languages Supported</div>
+            </div>
+            <div>
+              <div className="text-2xl font-bold text-primary dark:text-orange-400 mb-1">✓</div>
+              <div className="text-sm text-gray-600 dark:text-gray-400">Production Deployed</div>
+            </div>
+          </div>
         </div>
       </div>
     </motion.div>
