@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion';
 import { FaGithub, FaExternalLinkAlt } from 'react-icons/fa';
-import SurmedaniaShowcase from './SurmedaniaShowcase';
+import AppShowcase from './AppShowcase';
 
 interface Project {
   title: string;
@@ -80,11 +80,102 @@ const Projects = () => {
           <p className="text-gray-600 dark:text-gray-300 text-base sm:text-lg transition-colors duration-500">Some of my recent work</p>
         </motion.div>
 
+        {/* App Showcases */}
+        <div className="max-w-7xl mx-auto mb-16 space-y-16">
+          {/* Surmedania Showcase */}
+          <motion.div
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            viewport={{ once: true }}
+            className="bg-white dark:bg-gray-800 rounded-2xl shadow-lg p-8 border border-gray-100 dark:border-gray-700"
+          >
+            <div className="mb-6">
+              <h3 className="text-3xl font-bold mb-2 text-gray-800 dark:text-gray-100">
+                Surmedania.com
+              </h3>
+              <p className="text-gray-600 dark:text-gray-300 mb-4">
+                A responsive dance school website featuring class sign-ups, user account functions, and integrated merch payments
+              </p>
+              <div className="flex flex-wrap gap-2 mb-4">
+                {projects[0].technologies.map((tech, i) => (
+                  <span
+                    key={i}
+                    className="px-3 py-1 bg-gradient-to-r from-primary/10 to-secondary/10 dark:from-orange-500/20 dark:to-amber-500/20 text-primary dark:text-orange-400 text-sm rounded-full font-medium"
+                  >
+                    {tech}
+                  </span>
+                ))}
+              </div>
+              <div className="flex gap-4">
+                {projects[0].github && (
+                  <motion.a
+                    whileHover={{ scale: 1.05 }}
+                    href={projects[0].github}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-2 px-4 py-2 bg-gray-800 dark:bg-gray-700 text-white rounded-lg hover:bg-gray-700 dark:hover:bg-gray-600 transition-colors duration-300"
+                  >
+                    <FaGithub /> Code
+                  </motion.a>
+                )}
+                {projects[0].demo && (
+                  <motion.a
+                    whileHover={{ scale: 1.05 }}
+                    href={projects[0].demo}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-primary to-secondary dark:from-orange-500 dark:to-amber-600 text-white rounded-lg hover:opacity-90 transition-all duration-300"
+                  >
+                    <FaExternalLinkAlt /> Demo
+                  </motion.a>
+                )}
+              </div>
+            </div>
+            <AppShowcase 
+              appUrl="https://surmedania.com"
+              desktopLabel="Desktop View"
+              mobileLabel="Mobile View"
+            />
+          </motion.div>
+
+          {/* Kassi Showcase */}
+          <motion.div
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            viewport={{ once: true }}
+            className="bg-white dark:bg-gray-800 rounded-2xl shadow-lg p-8 border border-gray-100 dark:border-gray-700"
+          >
+            <div className="mb-6">
+              <h3 className="text-3xl font-bold mb-2 text-gray-800 dark:text-gray-100">
+                Kassi.no
+              </h3>
+              <p className="text-gray-600 dark:text-gray-300 mb-4">
+                Experience the Kassi.no website in both desktop and mobile views
+              </p>
+              <div className="flex gap-4">
+                <motion.a
+                  whileHover={{ scale: 1.05 }}
+                  href="https://kassi.no"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-primary to-secondary dark:from-orange-500 dark:to-amber-600 text-white rounded-lg hover:opacity-90 transition-all duration-300"
+                >
+                  <FaExternalLinkAlt /> Visit Site
+                </motion.a>
+              </div>
+            </div>
+            <AppShowcase 
+              appUrl="https://kassi.no"
+              desktopLabel="Desktop View"
+              mobileLabel="Mobile View"
+            />
+          </motion.div>
+        </div>
+
+        {/* Regular project cards */}
         <div className="grid md:grid-cols-2 gap-8 max-w-6xl mx-auto">
-          {/* Special showcase for Surmedania */}
-          <SurmedaniaShowcase />
-          
-          {/* Regular project cards for other projects */}
           {projects.slice(1).map((project, index) => (
             <motion.div
               key={index}
