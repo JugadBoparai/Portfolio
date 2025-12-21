@@ -226,8 +226,6 @@ const Header = () => {
                 className={`transition-colors font-medium ${
                   activeSection === item.toLowerCase()
                     ? 'text-cyan-500 dark:text-orange-500'
-                    : activeSection === 'about'
-                    ? 'text-white hover:text-cyan-300 dark:text-gray-200 dark:hover:text-orange-400'
                     : 'text-gray-500 hover:text-cyan-400 dark:text-gray-300 dark:hover:text-orange-400'
                 }`}
               >

@@ -14,44 +14,44 @@ const AppShowcase = ({
   const [activeView, setActiveView] = useState<'both' | 'desktop' | 'mobile'>('both');
 
   return (
-    <div className="w-full py-4 px-4">
+    <div className="w-full py-2 px-2">
       {/* Toggle Buttons */}
-      <div className="flex flex-wrap justify-center gap-2 mb-6">
+      <div className="flex flex-wrap justify-center gap-1.5 mb-4">
         <button
           onClick={() => setActiveView('both')}
-          className={`px-4 py-1.5 text-sm rounded-lg font-medium transition-all duration-300 ${
+          className={`px-3 py-1 text-xs rounded-md font-medium transition-all duration-300 ${
             activeView === 'both'
               ? 'bg-primary text-white shadow-md scale-105'
               : 'bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-300 dark:hover:bg-gray-600'
           }`}
         >
-          Both Views
+          Both
         </button>
         <button
           onClick={() => setActiveView('desktop')}
-          className={`px-4 py-1.5 text-sm rounded-lg font-medium transition-all duration-300 ${
+          className={`px-3 py-1 text-xs rounded-md font-medium transition-all duration-300 ${
             activeView === 'desktop'
               ? 'bg-primary text-white shadow-md scale-105'
               : 'bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-300 dark:hover:bg-gray-600'
           }`}
         >
-          Desktop View
+          Desktop
         </button>
         <button
           onClick={() => setActiveView('mobile')}
-          className={`px-4 py-1.5 text-sm rounded-lg font-medium transition-all duration-300 ${
+          className={`px-3 py-1 text-xs rounded-md font-medium transition-all duration-300 ${
             activeView === 'mobile'
               ? 'bg-primary text-white shadow-md scale-105'
               : 'bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-300 dark:hover:bg-gray-600'
           }`}
         >
-          Mobile View
+          Mobile
         </button>
       </div>
 
       {/* Iframes Container */}
       <div 
-        className={`flex gap-4 lg:gap-6 items-start lg:items-center justify-center transition-all duration-500 ${
+        className={`flex gap-3 lg:gap-6 items-start lg:items-start justify-center transition-all duration-500 ${
           activeView === 'both' 
             ? 'flex-col lg:flex-row' 
             : 'flex-col'
@@ -66,15 +66,15 @@ const AppShowcase = ({
                 : 'w-full max-w-full'
             }`}
           >
-            <div className="mb-2">
-              <h3 className="text-base font-semibold text-gray-800 dark:text-gray-200">
+            <div className="mb-1.5">
+              <h3 className="text-sm font-semibold text-gray-800 dark:text-gray-200">
                 {desktopLabel}
               </h3>
             </div>
-            <div className="rounded-xl overflow-hidden shadow-md border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 relative">
+            <div className="rounded-lg overflow-hidden shadow-md border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 relative">
               <iframe
                 src={appUrl}
-                className="w-full h-[400px] border-0 transition-opacity duration-300"
+                className="w-full max-w-[1280px] h-[800px] border-0 transition-opacity duration-300"
                 title={desktopLabel}
                 loading="lazy"
                 allow="fullscreen"
@@ -92,16 +92,16 @@ const AppShowcase = ({
                 : 'w-full flex justify-center'
             }`}
           >
-            <div className="w-full max-w-[320px]">
-              <div className={`mb-2 ${activeView === 'both' ? 'text-center lg:text-left' : 'text-center'}`}>
-                <h3 className="text-base font-semibold text-gray-800 dark:text-gray-200">
+            <div className="w-full max-w-[390px]">
+              <div className={`mb-1.5 ${activeView === 'both' ? 'text-center lg:text-left' : 'text-center'}`}>
+                <h3 className="text-sm font-semibold text-gray-800 dark:text-gray-200">
                   {mobileLabel}
                 </h3>
               </div>
-              <div className="rounded-[2.5rem] overflow-hidden shadow-xl border-[3px] border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 p-2 relative">
+              <div className="rounded-[2rem] overflow-hidden shadow-lg border-2 border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 p-1.5 relative">
                 <iframe
                   src={appUrl}
-                  className="w-full h-[550px] border-0 rounded-[2rem] transition-opacity duration-300"
+                  className="w-full h-[844px] border-0 rounded-[1.75rem] transition-opacity duration-300"
                   title={mobileLabel}
                   loading="lazy"
                   allow="fullscreen"
