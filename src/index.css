@@ -16,7 +16,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
   -webkit-text-size-adjust: 100%;
   text-size-adjust: 100%;
-  overscroll-behavior-y: none;
+  overscroll-behavior-y: auto;
   -webkit-tap-highlight-color: transparent;
 }
 
@@ -38,9 +38,15 @@ html.dark {
 /* Mobile safety: prevent sideways scroll and respect safe areas */
 html, body {
   width: 100%;
-  min-height: 100vh;
-  min-height: 100dvh; /* Dynamic viewport height for modern mobile browsers */
+  min-height: 100%;
   overflow-x: hidden;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+#root {
+  min-height: 100vh;
+  min-height: 100dvh; /* Keep full-height layout while allowing normal document scroll */
 }
 
 /* Account for iOS notch safe areas on fixed header/footer */
