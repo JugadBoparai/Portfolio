@@ -5,8 +5,8 @@ const Resume = () => {
   const handleDownload = () => {
     // In production, replace this with your actual resume PDF URL
     const link = document.createElement('a');
-    link.href = '/JugadBoparaiCV.pdf';
-    link.download = 'Jugad_Boparai_CV.pdf';
+    link.href = '/jugadboparai_CV-2026.pdf';
+    link.download = 'jugadboparai_CV-2026.pdf';
     link.click();
   };
 
